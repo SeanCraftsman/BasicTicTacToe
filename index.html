@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>  
+    <style>
+        body{
+            background-color: #ccc;
+            padding-top: 5%;
+        }
+        .container {
+            width:340px;
+            height:320px;
+            margin:10px auto;
+            padding-left:10px;
+            padding-top:20px;
+            background: white;
+            border:3px solid #eee;
+            border-radius: 2%;
+            box-shadow: 4px 4px 8px #888;
+        }
+        .cells {
+            display: block;
+            float:left;
+            width:80px;
+            height:80px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            border:2px solid #ccc;
+            color:#455;
+            text-decoration: none;
+            font-size: 60px;
+            line-height:80px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="javascript:;" class="cells" id="cell-0-0"></a>
+        <a href="javascript:;" class="cells" id="cell-0-1"></a>
+        <a href="javascript:;" class="cells" id="cell-0-2"></a>
+        <a href="javascript:;" class="cells" id="cell-1-0"></a>
+        <a href="javascript:;" class="cells" id="cell-1-1"></a>
+        <a href="javascript:;" class="cells" id="cell-1-2"></a>
+        <a href="javascript:;" class="cells" id="cell-2-0"></a>
+        <a href="javascript:;" class="cells" id="cell-2-1"></a>
+        <a href="javascript:;" class="cells" id="cell-2-2"></a>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>
