@@ -1,5 +1,5 @@
-var TICK = '√';
-var CROSS = 'Χ';
+var TICK = '○';
+var CROSS = '×';
 
 var model = [];
 var cells = [];
