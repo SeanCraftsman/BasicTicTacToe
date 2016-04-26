@@ -1,5 +1,5 @@
-var TICK = '○';
-var CROSS = '×';
+TICK = 'O';
+CROSS = 'X';
 
 var model = [];
 var cells = [];
@@ -17,13 +17,18 @@ var newGame = function(){
 
 var freshView = function(){
     var i, j;
-
+    var TICK = document.createElement("img");
+    TICK.setAttribute("src","img/tick.png");
+    var CROSS = document.createElement("img");
+    CROSS.setAttribute("src","img/cross.png");
     for (i=0; i<3; i++)
         for (j=0; j<3; j++)
-            if (model[i][j] == 1)
-                cells[i][j].text = CROSS;
-            else if (model[i][j] == 2)
-                cells[i][j].text = TICK;
+            if (model[i][j] == 1 && cells[i][j].childNodes.length <= 1){
+                cells[i][j].appendChild(CROSS);
+            }
+            else if (model[i][j] == 2 && cells[i][j].childNodes.length <= 1){
+                cells[i][j].appendChild(TICK);
+            }
 }
 
 var checkWin = function(x, y){
@@ -65,7 +70,6 @@ var checkFull = function(){
 
 window.onload = function(){
     var i, j;
-    
     // 初始化二维数组
     for (i=0; i<3; i++){
         model[i] = [];
