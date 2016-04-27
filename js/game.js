@@ -7,11 +7,22 @@ var cells = [];
 var flag; // 用于表示轮到谁了
 var mode = "2P";
 
+var clearText = function(parent){
+      while(true){
+      if(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+      }
+      else{
+          break;
+      }
+  }
+}
+
 var newGame = function(){
     for (i=0; i<3; i++)
         for (j=0; j<3; j++){
             model[i][j] = 0;
-            cells[i][j].text = ' ';
+            clearText(cells[i][j]);
         }
     flag = 1;
 }
@@ -71,6 +82,19 @@ var computePos = function(){
     for(var i=0; i < 3; i++){
         for(var j=0; j < 3; j++){
             if(model[i][j] == 0){
+                model[i][j] = 1;
+                if(checkWin(i,j)){
+                    return [i,j];
+                }
+                else{
+                    model[i][j] = 0;
+                }
+            }
+        }
+    }
+    for(var i=0; i < 3; i++){
+        for(var j=0; j < 3; j++){
+            if(model[i][j] == 0){
                 model[i][j] = 2;
                 if(checkWin(i,j)){
                     model[i][j] = 1;
@@ -82,6 +106,7 @@ var computePos = function(){
             }
         }
     }
+    
     do{
         var i = Math.floor(Math.random()*3);
         var j = Math.floor(Math.random()*3);
