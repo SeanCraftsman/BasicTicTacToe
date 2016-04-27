@@ -11,7 +11,6 @@
         .container {
             width:340px;
             height:320px;
-            margin:10px auto;
             padding-left:10px;
             padding-top:20px;
             background: white;
@@ -21,8 +20,8 @@
             position: absolute;
             left:50%;
             top:40%;
-            margin-left: -170px;
-            margin-top: -160px;
+            margin-left: -183px;
+            margin-top: -168px;
         }
         .cells {
             display: block;
@@ -39,6 +38,32 @@
             line-height:80px;
             text-align: center;
         }
+        .buttons{
+            position: absolute;
+            width: 140px;
+            height: 100px;
+            text-align: center;
+            left: 50%;
+            top:40%;
+            margin-left: -70px;
+            margin-top: 200px; 
+        }
+        input[type='button']{
+            display: block;
+            width: 120px;
+            height:30px;
+            border-radius: 7px;
+            border: none;
+            background: #34D;
+            color: white;
+            font-size: 19px;
+            box-shadow: 2px 2px 1px #888;
+            margin:10px auto;
+        }
+        input[type='button']:hover{
+            background: #0063dc;
+            box-shadow: 2px 2px 3px #777;
+        }
     </style>
 </head>
 <body>
@@ -54,7 +79,10 @@
         <a href="javascript:;" class="cells" id="cell-2-1"></a>
         <a href="javascript:;" class="cells" id="cell-2-2"></a>
     </div>
-    
+    <div class="buttons">
+        <input type="button" value="双人对战" class="button" id="2P">
+        <input type="button" value="人机对战" class="button" id="1P">
+    </div>
     <script src="js/game.js"></script>
 </body>
 </html>
