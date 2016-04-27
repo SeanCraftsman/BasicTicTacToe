@@ -164,7 +164,12 @@ window.onload = function(){
                         }
                     }
                     else{
-                        model[i][j] = 2;
+                        if (model[i][j] == 0){
+                            model[i][j] = 2;    
+                        }
+                        else{
+                            return;
+                        }
                         freshView();
                         if (checkWin(i, j)){
                             alert("玩家胜利！");
