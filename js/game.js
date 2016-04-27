@@ -5,6 +5,7 @@ var model = [];
 var cells = [];
 
 var flag; // 用于表示轮到谁了
+var mode = "2P";
 
 var newGame = function(){
     for (i=0; i<3; i++)
@@ -66,6 +67,44 @@ var checkFull = function(){
     return true;
 }
 
+var computePos = function(){
+    for(var i=0; i < 3; i++){
+        for(var j=0; j < 3; j++){
+            if(model[i][j] == 0){
+                model[i][j] = 2;
+                if(checkWin(i,j)){
+                    model[i][j] = 1;
+                    return [i,j];
+                }
+                else{
+                    model[i][j] = 0;
+                }
+            }
+        }
+    }
+    do{
+        var i = Math.floor(Math.random()*3);
+        var j = Math.floor(Math.random()*3);
+    }while(model[i][j] != 0);
+    console.log("in compute i:"+i+" j:"+j);
+    model[i][j] = 1;
+    return [i,j];
+}
+
+var autoPlay = function(){
+    var pos = computePos();
+    console.log("out the compute i:"+pos[0]+" j:"+pos[1]);
+    freshView();
+    if (checkWin(pos[0], pos[1])){
+        alert("电脑胜利！");
+        newGame();
+    }
+    if (checkFull()){
+        alert("平局！");
+        newGame();
+    }
+}
+
 
 
 window.onload = function(){
@@ -75,6 +114,19 @@ window.onload = function(){
         model[i] = [];
         cells[i] = [];
     }
+    var singlePlayer = document.getElementById("1P");
+    singlePlayer.onclick = function(){
+        mode = "1P";
+        newGame();
+        console.log("1 player");
+    }
+
+    var twoPlayer = document.getElementById("2P");
+    twoPlayer.onclick = function(){
+        mode = "2P";
+        newGame();
+        console.log("2 players");
+    }
 
     for (i=0; i<3; i++)
         for (j=0; j<3; j++){
@@ -82,30 +134,47 @@ window.onload = function(){
 
             (function(j, i){
                 cells[i][j].onclick = function(){
-                    if (model[i][j] == 0){
-                        model[i][j] = flag + 1;    
+                    if(mode == "2P"){
+                        if (model[i][j] == 0){
+                            model[i][j] = flag + 1;    
+                        }
+                        else{
+                            return;
+                        }
+
+                        if (flag)
+                            flag = 0;
+
+                        else
+                            flag = 1;
+
+                        freshView();
+
+                        if (checkWin(i, j)){
+                            if (flag)
+                                alert("用 " + CROSS + " 的选手胜利！");
+                            else
+                                alert("用 " + TICK + " 的选手胜利！");
+                            newGame();
+                        }
+
+                        if (checkFull()){
+                            alert("平局！");
+                            newGame();
+                        }
                     }
                     else{
-                        return;
-                    }
-
-                    if (flag)
-                        flag = 0;
-                    else
-                        flag = 1;
-
-                    freshView();
-
-                    if (checkWin(i, j)){
-                        if (flag)
-                            alert("用 " + CROSS + " 的选手胜利！");
-                        else
-                            alert("用 " + TICK + " 的选手胜利！");
-                        newGame();
-                    }
-
-                    if (checkFull()){
-                        newGame();
+                        model[i][j] = 2;
+                        freshView();
+                        if (checkWin(i, j)){
+                            alert("玩家胜利！");
+                            newGame();
+                        }
+                        if (checkFull()){
+                            alert("平局！");
+                            newGame();
+                        }
+                        autoPlay();
                     }
                     
                 }
